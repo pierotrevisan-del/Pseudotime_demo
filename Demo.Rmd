@@ -44,8 +44,8 @@ sce
 ## Filtering and normalization
 
 ### Removing low-quality cells
-First, we remove low-quality cells.
-In this step, we discard cells with an excessive proportion of mitochondrial genes or too few detected genes, as these often indicate damaged or low-quality cells.
+First, I remove low-quality cells.
+In this step, I discard cells with an excessive proportion of mitochondrial genes or too few detected genes, as these often indicate damaged or low-quality cells.
 
 ```{r filter}
 libsize <- colSums(counts(sce))
@@ -58,8 +58,8 @@ sce <- sce[, keep]
 
 ### Removing lowly expressed genes
 
-Next, we filter out lowly expressed genes to reduce noise and focus on informative features.
-Here, we retain only genes with at least one UMI detected in at least 5\% of all cells.
+Next, I filter out lowly expressed genes to reduce noise and focus on informative features.
+Here, I retain only genes with at least one UMI detected in at least 5\% of all cells.
 
 ```{r qc-gene-filter}
 num_reads <- 1
@@ -72,7 +72,7 @@ sce
 ### Normalization
 
 
-We then compute the normalization factors and normalize the data.
+I then compute the normalization factors and normalize the data.
 
 ```{r scran}
 sce <- logNormCounts(sce)
@@ -83,7 +83,7 @@ sce
 
 ### PCA on normalized values
 
-Here, we compute the first 50 principal components using the top variable genes.
+Here, I compute the first 50 principal components using the top variable genes.
 
 ```{r pca}
 sce <- scater::runPCA(sce, ncomponents = 50,
@@ -97,7 +97,7 @@ plotPCA(sce, colour_by = "labels")
 
 ## Pseudotime analisys
 
-In this step, we infer cell trajectories and compute pseudotime values using Slingshot, based on the PCA embedding and cluster identities (“labels”).
+In this step, I infer cell trajectories and compute pseudotime values using Slingshot, based on the PCA embedding and cluster identities (“labels”).
 The resulting pseudotime estimates for each lineage are stored in the sce object for downstream visualization and analysis.
 ```{r pseudotime}
 sce <- slingshot(sce, clusterLabels = "labels", reducedDim = "PCA")
@@ -113,7 +113,7 @@ table(is.na(sce$pseudotime_lineage3))
 
 ### Pseudotime visualization
 
-Now we visualize the pseudotime trajectory inferred by Slingshot along each lineage, by plotting the cells in PCA space and coloring them according to their pseudotime values.
+Now I visualize the pseudotime trajectory inferred by Slingshot along each lineage, by plotting the cells in PCA space and coloring them according to their pseudotime values.
 
 ```{r plotpseudotimelinege1}
 pca <- reducedDim(sce, "PCA")
