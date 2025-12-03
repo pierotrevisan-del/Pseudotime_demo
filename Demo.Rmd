@@ -31,7 +31,6 @@ library(tradeSeq)
 ```{r data}
 sce <- TENxPBMCData("pbmc4k")
 counts(sce)
-setwd("/Users/USER/Documents/TESI/Dati")
 groups <- readRDS("groups.rds")
 set.seed(123)
 names <- sample(groups)
